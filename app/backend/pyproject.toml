@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "graphene+react"
+version = "0.1.0"
+description = ""
+authors = ["= <=>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+graphene = "^3.2.2"
+django-graphql-jwt = "^0.3.4"
+python-dotenv = "^1.0.0"
+
+
+[tool.poetry.group.dev.dependencies]
+flake8 = "^6.0.0"
+coverage = "^7.2.7"
+django-extensions = "^3.2.3"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
