@@ -8,8 +8,20 @@ const LoginForm = ({user,setUser}) => {
     const passwordInputRef = useRef();
     return (
         <Form className={"mt-3"}>
-            <TextInput label={"Login:"} id='login_field' type={'text'} _ref={loginInputRef}></TextInput>
-            <TextInput label={"Password:"} id='password_field' type={'password'} _ref={passwordInputRef}></TextInput>
+            <TextInput
+                label={"Login:"}
+                id='login_field'
+                type={'text'}
+                _ref={loginInputRef}
+                autoComplete="username"
+            />
+            <TextInput
+                label={"Password:"}
+                id='password_field'
+                type={'password'}
+                _ref={passwordInputRef}
+                autoComplete="current-password"
+            />
             <NewButton
                 variant="primary"
                 classes={"mt-3"}
