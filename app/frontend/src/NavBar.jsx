@@ -2,8 +2,13 @@ import React from 'react';
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
+import {useDispatch, useSelector} from "react-redux";
+import {logoutAction} from "./store/UserReducer";
 
-const NavBar = (user) => {
+const NavBar = () => {
+    const user = useSelector(state =>state.user)
+    const dispatch = useDispatch()
+
     return (
         <Navbar collapseOnSelect expand="md" bg="dark" data-bs-theme="dark" className="bg-body-tertiary">
             <Container>
@@ -16,7 +21,7 @@ const NavBar = (user) => {
                     </Nav>
                     <Nav>
                         <Nav.Item className={"text-light"}>{user.is_login?user.username:""}</Nav.Item>
-                        {user.is_login && (<Nav.Link href={"logout/"}>logout</Nav.Link>)}
+                        {user.is_login && (<Nav.Link onClick={() =>dispatch(logoutAction())}>logout</Nav.Link>)}
                     </Nav>
                 </Navbar.Collapse>i
             </Container>

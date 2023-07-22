@@ -2,8 +2,17 @@ import React, {useRef} from 'react';
 import TextInput from "./components/input/TextInput";
 import NewButton from "./components/button/NewButton";
 import {Form} from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux";
+import {userSetAction} from "./store/UserReducer";
 
-const LoginForm = ({user,setUser}) => {
+const LoginForm = () => {
+    const dispatch = useDispatch()
+    const user = useSelector(state =>state.user)
+
+    const userLogin = (username,password) => {
+        dispatch(userSetAction({username:username,password:password}))
+    }
+
     const loginInputRef = useRef();
     const passwordInputRef = useRef();
     return (
@@ -27,12 +36,10 @@ const LoginForm = ({user,setUser}) => {
                 classes={"mt-3"}
                 onClick={e=>{
                     e.preventDefault()
-                    setUser({
-                        is_login: true,
-                        login:loginInputRef.current.value,
-                        password:passwordInputRef.current.value
-                    })
-                    console.log("User", user)
+                    userLogin(loginInputRef.current.value,passwordInputRef.current.value)
+                    //     login:loginInputRef.current.value,
+                    //     password:passwordInputRef.current.value
+                    // })
                 }}
             >Login</NewButton>
         </Form>
