@@ -1,6 +1,6 @@
 ## Graphene with react
 
-[![Front tests](https://github.com/yuriy-kormin/graphene_react/actions/workflows/front_tests.yml/badge.svg)](https://github.com/yuriy-kormin/graphene_react/actions/workflows/front_tests.yml)
+[![React testing](https://github.com/yuriy-kormin/graphene_react/actions/workflows/front_tests.yml/badge.svg)](https://github.com/yuriy-kormin/graphene_react/actions/workflows/front_tests.yml)
 
 This repository aims to establish a connection between a 
 Django backend using the Graphene library for GraphQL and 

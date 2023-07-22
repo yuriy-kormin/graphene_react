@@ -6,6 +6,9 @@ jobs:
   test:
     name: Run Jest Tests
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./app/frontend/
 
     steps:
     - name: Checkout repository
@@ -13,9 +16,6 @@ jobs:
 
     - name: Install dependencies
       run: npm install
-      working-directory: ./app/frontend/
-
 
     - name: Run Jest tests
       run: npm test
-      working-directory: ./app/frontend/
