@@ -4,10 +4,11 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import {useDispatch, useSelector} from "react-redux";
 import {logoutAction} from "./store/UserReducer";
+import {getUser} from "./store/selectors/getUser";
 
 const NavBar = () => {
-    const user = useSelector(state =>state.user)
     const dispatch = useDispatch()
+    const user = useSelector(getUser);
 
     return (
         <Navbar collapseOnSelect expand="md" bg="dark" data-bs-theme="dark" className="bg-body-tertiary">

@@ -7,11 +7,13 @@ import UserList from "./userList";
 import NavBar from "./NavBar";
 // import gql from "graphql-tag";
 // import async from "async";
-import {useDispatch, useSelector} from "react-redux";
+// import {useSelector} from "react-redux";
+import {getUser} from "./store/selectors/getUser";
+import {useSelector} from "react-redux";
 
 function App() {
     // const dispatch =useDispatch()
-    const user = useSelector(state => state.user)
+    const user = useSelector(getUser);
     async function getLocalTokens() {
         // const token = localStorage.getItem('token');
         // const refreshToken = localStorage.getItem('refreshToken');

@@ -4,10 +4,11 @@ import NewButton from "./components/button/NewButton";
 import {Form} from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
 import {userSetAction} from "./store/UserReducer";
+import {getUser} from "./store/selectors/getUser";
 
 const LoginForm = () => {
     const dispatch = useDispatch()
-    const user = useSelector(state =>state.user)
+    const user = useSelector(getUser);
 
     const userLogin = (username,password) => {
         dispatch(userSetAction({username:username,password:password}))
