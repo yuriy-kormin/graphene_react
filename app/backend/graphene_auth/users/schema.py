@@ -2,6 +2,8 @@ import graphene
 import graphql_jwt
 from django.contrib.auth import get_user_model
 from graphene_django import DjangoObjectType
+from graphql_jwt.decorators import login_required
+from graphql_jwt.settings import jwt_settings
 
 
 class UserType(DjangoObjectType):
@@ -19,5 +21,8 @@ class AuthMutation(graphene.ObjectType):
 class Query(graphene.ObjectType):
     user_listing = graphene.List(UserType)
 
+    @login_required
     def resolve_user_listing(self, info):
+        # print(jwt_settings.__dict__)
         return get_user_model().objects.all()
+        # raise GraphQLError('Authentication failure!!')
