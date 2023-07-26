@@ -1,4 +1,3 @@
-import {type} from "@testing-library/user-event/dist/type";
 import {removeTokensFromStorage} from "./tokenStore";
 
 const setUser = "SET_USER"
@@ -33,7 +32,8 @@ export const userReducer = (state={is_login:false}, action) => {
             break;
         case logout:
             removeTokensFromStorage()
-            return {is_login:false}
+            return {is_login:false};
+            break;
         default:
             return state
     }
