@@ -11,7 +11,7 @@ const NavBar = () => {
     const user = useSelector(getUser);
 
     return (
-        <Navbar collapseOnSelect expand="md" bg="dark" data-bs-theme="dark" className="bg-body-tertiary">
+        <Navbar expand="md" bg="dark" data-bs-theme="dark" className="bg-body-tertiary">
             <Container>
                 <Navbar.Brand>
                     <Nav.Link href="/" active className="text-primary">Brand name</Nav.Link>
@@ -19,12 +19,10 @@ const NavBar = () => {
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="me-auto">
-                    </Nav>
-                    <Nav>
                         <Nav.Item className={"text-light"}>{user.is_login?user.username:""}</Nav.Item>
                         {user.is_login && (<Nav.Link onClick={() =>dispatch(logoutAction())}>logout</Nav.Link>)}
                     </Nav>
-                </Navbar.Collapse>i
+                </Navbar.Collapse>
             </Container>
         </Navbar>
     );
