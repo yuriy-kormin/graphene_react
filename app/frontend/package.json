@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.17.0"
+    "@testing-library/jest-dom": "^5.17.0",
+    "@urql/devtools": "^2.0.3"
   }
 }

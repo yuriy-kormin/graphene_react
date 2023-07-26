@@ -1,13 +1,38 @@
 import {type} from "@testing-library/user-event/dist/type";
+import {removeTokensFromStorage} from "./tokenStore";
 
 const setUser = "SET_USER"
 const logout = "LOGOUT"
 
+const parseAuthResult = (authData) => {
+    const listKeys = [
+        'token',
+        'refreshToken',
+        'refreshExpiresIn',
+        'payload'
+    ]
+    const allKeysExist = listKeys.every((key) => authData.hasOwnProperty(key));
+    if (allKeysExist) {
+        return {
+            token: authData.token,
+            refreshToken: authData.refreshToken,
+            refreshExpiresIn: authData.refreshExpiresIn,
+            username: authData.payload.username,
+            tokenExpiresIn:authData.payload.exp
+        }
+    }
+}
+
 export const userReducer = (state={is_login:false}, action) => {
     switch (action.type){
         case setUser:
-            return {...state, is_login:true, ...action.payload}
+            const json = parseAuthResult(action.payload)
+            if (json){
+                return {...state, is_login:true, ...json}
+            }
+            break;
         case logout:
+            removeTokensFromStorage()
             return {is_login:false}
         default:
             return state
