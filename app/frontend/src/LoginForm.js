@@ -36,11 +36,6 @@ const LoginForm = () => {
         <Form className={"mt-3"} data-testid='loginForm'>
             {
                 loginError && !result.fetching && (
-                // <Alert
-                //     variant='danger'
-                //     onClose={() => setLoginError(false)}
-                //     dismissible
-                // >Введенные данные не верны</Alert>
                 <ErrorAlert
                     onclose={() => setLoginError(false)}
                 >Введенные данные не верны</ErrorAlert>
@@ -49,6 +44,7 @@ const LoginForm = () => {
             <TextInput
                    id="login_field"
                    label="Login"
+                   data-testid='login'
                    icon={faUser}
                    className = {loginError && !result.fetching?'is-invalid':''}
                    _ref = {loginInputRef}
@@ -57,47 +53,13 @@ const LoginForm = () => {
             <TextInput
                 id="password_field"
                 label="Password"
+                data-testid='password'
                 icon={faLock}
                 className = {loginError && !result.fetching?'is-invalid':''}
                 _ref = {passwordInputRef}
                 autoComplete='password'
                 is_password={true}
             />
-            {/*<InputGroup className="mb-3">*/}
-            {/*    <InputGroup.Text><FontAwesomeIcon icon={faUser}/></InputGroup.Text>*/}
-            {/*    <FloatingLabel label='Login'>*/}
-            {/*        <TextInput*/}
-            {/*            placeholder = 'Login'*/}
-            {/*            id='login_field'*/}
-            {/*            data-testid='login'*/}
-            {/*            className = {loginError && !result.fetching?'is-invalid':''}*/}
-            {/*            type={'text'}*/}
-            {/*            _ref={loginInputRef}*/}
-            {/*            autoComplete="username"*/}
-            {/*        />*/}
-            {/*    </FloatingLabel>*/}
-            {/*</InputGroup>*/}
-
-            {/*<InputGroup className="mb-3">*/}
-            {/*    <InputGroup.Text><FontAwesomeIcon icon={faLock}/></InputGroup.Text>*/}
-            {/*    <FloatingLabel label='Password'>*/}
-            {/*        <TextInput*/}
-            {/*            placeholder='Password'*/}
-            {/*            id='password_field'*/}
-            {/*            data-testid='password'*/}
-            {/*            className = {loginError && !result.fetching?'is-invalid':''}*/}
-            {/*            type={showPassword ? 'text' : 'password'}*/}
-            {/*            _ref={passwordInputRef}*/}
-            {/*            autoComplete="current-password"*/}
-            {/*        />*/}
-            {/*    </FloatingLabel>*/}
-            {/*    <Button*/}
-            {/*        variant="secondary"*/}
-            {/*        onClick={togglePasswordVisibility}*/}
-            {/*    >*/}
-            {/*        <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />*/}
-            {/*    </Button>*/}
-            {/*</InputGroup>*/}
             <NewButton
                 variant="primary"
                 classes={"mt-3"}
