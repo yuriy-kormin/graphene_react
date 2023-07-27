@@ -16,8 +16,6 @@ const UserList = () => {
     const [result] = useQuery({ query: QUERY });
     const { data, fetching, error } = result
 
-    console.log(result)
-
     if (fetching) return <div>Fetching</div>
     if (error) return <div>Error{error.message}</div>
 

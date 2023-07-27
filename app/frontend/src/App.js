@@ -77,7 +77,6 @@ function App({urqlClient=undefined}) {
                 fetchExchange,
             ],
         })
-    console.log('client',value)
     // async function refreshAuthState() {
     //     const {token, refreshToken} = getLocalTokens();
     //     const GetNewTokenQUERY=gql`

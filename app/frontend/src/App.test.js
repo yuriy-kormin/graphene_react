@@ -4,6 +4,7 @@ import {store} from "./store";
 import {Provider} from "react-redux";
 import userEvent from "@testing-library/user-event";
 import {delay, fromValue, never, pipe} from 'wonka';
+import {act} from "react-dom/test-utils";
 
 
 
@@ -39,7 +40,9 @@ describe('App root testing',()=>{
 
         userEvent.type(screen.getByTestId('login'),'test_login');
         userEvent.type(screen.getByTestId('password'),'test_pass');
-        userEvent.click(screen.getByTestId('login_btn'));
+        act(()=>{
+            userEvent.click(screen.getByTestId('login_btn'));
+        })
         //
         await waitFor(() => {
         expect(mockClient.executeMutation).toBeCalledTimes(1);

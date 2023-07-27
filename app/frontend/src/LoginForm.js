@@ -1,7 +1,7 @@
 import React, {useRef, useState} from 'react';
 import TextInput from "./components/input/TextInput";
 import NewButton from "./components/button/NewButton";
-import {Alert, Button, FloatingLabel, Form, InputGroup, Spinner} from "react-bootstrap";
+import {Form} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {useMutation} from "urql";
 import {LoginQUERY} from "./backend_helpers/queries";
@@ -14,8 +14,8 @@ const LoginForm = () => {
     const dispatch = useDispatch()
     const [loginError, setLoginError] = useState(false);
 
-
     const [result,processLogin] = useMutation(LoginQUERY);
+
     const loginInputRef = useRef();
     const passwordInputRef = useRef();
 
