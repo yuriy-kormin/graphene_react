@@ -1,13 +1,17 @@
 import React from 'react';
-import {Alert} from "react-bootstrap";
+import {Alert, Modal} from "react-bootstrap";
 
-const ErrorAlert = ({children, ...props}) => {
+const ErrorAlert = ({onClose,show,...props}) => {
+
+
     return (
+        <Modal show={show} onHide={onClose}>
         <Alert
+            className='m-0'
             variant='danger'
-            dismissible
             {...props}
-        >{children}</Alert>
+        >{props.children}</Alert>
+        </Modal>
     );
 };
 

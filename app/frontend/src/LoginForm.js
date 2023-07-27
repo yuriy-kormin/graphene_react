@@ -33,11 +33,12 @@ const LoginForm = () => {
     }
 
     return (
-        <Form className={"mt-3"} data-testid='loginForm'>
+        <Form className={"mt-5"} data-testid='loginForm'>
             {
                 loginError && !result.fetching && (
                 <ErrorAlert
-                    onclose={() => setLoginError(false)}
+                    show={loginError}
+                    onClose={() => setLoginError(false)}
                 >Введенные данные не верны</ErrorAlert>
                 )
             }
