@@ -14,22 +14,21 @@ requests.
 To properly configure CORS:
 - remove this line in settings.py
 
+```
+#settings.py 
 
-     #settings.py 
-
-        CORS_ORIGIN_ALLOW_ALL = True
-
+    CORS_ORIGIN_ALLOW_ALL = True
+```
 - add the following lines to your settings.py file:
+```
+#settings.py 
 
-   
-    #settings.py 
-
-       CORS_ALLOWED_ORIGINS = [
-       "www.example.com",
-       "http://127.0.0.1:8000",
-       ...
-       ]
-
+   CORS_ALLOWED_ORIGINS = [
+   "www.example.com",
+   "http://127.0.0.1:8000",
+   ...
+   ]
+```
 Please note that this application currently uses
 localStorage to store tokens. It's important to be
 aware that using localStorage for token storage is 
