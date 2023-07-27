@@ -1,4 +1,4 @@
-import {removeTokensFromStorage} from "./tokenStore";
+import {removeTokensFromStorage, setTokensToStorage} from "./tokenStore";
 
 const setUser = "SET_USER"
 const logout = "LOGOUT"
@@ -26,7 +26,9 @@ export const userReducer = (state={is_login:false}, action) => {
     switch (action.type){
         case setUser:
             const json = parseAuthResult(action.payload)
+
             if (json){
+                setTokensToStorage(json);
                 return {...state, is_login:true, ...json}
             }
             break;

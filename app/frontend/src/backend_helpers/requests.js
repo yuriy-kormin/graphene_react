@@ -1,4 +1,5 @@
 import {userSetAction} from "../store/UserReducer";
+import {setTokensToStorage} from "../store/tokenStore";
 
 
 export const processUserLogin = async (username, password,func_process,dispatch) => {
@@ -16,7 +17,5 @@ export const processUserLogin = async (username, password,func_process,dispatch)
             console.error('auth error')
             return false
         }
-
     })
-
 }
