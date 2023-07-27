@@ -3,7 +3,7 @@ import {removeTokensFromStorage} from "./tokenStore";
 const setUser = "SET_USER"
 const logout = "LOGOUT"
 
-const parseAuthResult = (authData) => {
+export const parseAuthResult = (authData) => {
     const listKeys = [
         'token',
         'refreshToken',
