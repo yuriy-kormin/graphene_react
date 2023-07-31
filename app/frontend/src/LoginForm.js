@@ -6,7 +6,7 @@ import {useDispatch} from "react-redux";
 import {useMutation} from "urql";
 import {LoginQUERY} from "./backend_helpers/queries";
 import {processUserLogin} from "./backend_helpers/requests";
-import {  faUser, faLock } from '@fortawesome/free-solid-svg-icons';
+import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 import Loading from "./components/spinner/Loading";
 import ErrorAlert from "./components/Alert/ErrorAlert";
 

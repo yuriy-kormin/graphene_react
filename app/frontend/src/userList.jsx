@@ -1,21 +1,12 @@
 import React from 'react';
 import {useQuery} from 'urql'
-import gql from 'graphql-tag'
+import {UserListQUERY} from "./backend_helpers/queries";
 
 
 
 const UserList = () => {
-    const QUERY =gql`
-        query {
-          userListing{
-            id
-            username
-          }
-        }
-    `
-    const [result] = useQuery({ query: QUERY });
-    const { data, fetching, error } = result
 
+    const [{ data, fetching, error }] = useQuery({query: UserListQUERY});
     if (fetching) return <div>Fetching</div>
     if (error) return <div>Error{error.message}</div>
 

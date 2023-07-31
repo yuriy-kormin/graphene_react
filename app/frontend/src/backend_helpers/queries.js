@@ -10,3 +10,20 @@ export const LoginQUERY =gql`
             }
         }
     `
+
+export const UserListQUERY =gql`
+        query {
+          userListing{
+            id
+            username
+          }
+        }
+    `
+
+export const RefreshTokenMUTATION =gql`mutation RefreshAuth($refreshToken:String!){
+  refreshToken(refreshToken:$refreshToken){
+    token
+    payload
+  }
+}
+`

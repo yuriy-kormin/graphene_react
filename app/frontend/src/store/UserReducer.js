@@ -28,7 +28,7 @@ export const userReducer = (state={is_login:false}, action) => {
             const json = parseAuthResult(action.payload)
 
             if (json){
-                setTokensToStorage(json);
+                setTokensToStorage(action.payload);
                 return {...state, is_login:true, ...json}
             }
             break;

@@ -11,6 +11,8 @@ import {authExchange} from "@urql/exchange-auth";
 import {userSetAction} from "./store/UserReducer";
 import {getTokensFromStorage} from "./store/tokenStore";
 
+
+
 function App({urqlClient=undefined}) {
     const dispatch = useDispatch()
     const user = useSelector(getUser);
@@ -20,7 +22,7 @@ function App({urqlClient=undefined}) {
                 devtoolsExchange,
                 dedupExchange,
                 cacheExchange,
-                authExchange(async (utils) => {
+                authExchange(async utils => {
                     // getAuth: async(user) =>{
                     console.log('begin getAuth');
                     if (!user.is_login) {
@@ -34,18 +36,40 @@ function App({urqlClient=undefined}) {
                         return null;
                     }
                     return {
-                        addAuthToOperation: () => {
+                        addAuthToOperation: operation => {
                             console.log('begin addAuthToOperation');
+                            if (user.is_login){
+                                console.log('set token to headers')
+                                return utils.appendHeaders(operation,{
+                                    Authorization: `Bearer ${user.token}`,
+                                })
+                            }
+                            return operation
+                            // makeOperation(operation.kind, operation, {
+                            //     ...operation.context,
+                            //     someAuthThing: user.token,
+                            // });
+                            // return operation
+
                         },
                         willAuthError: () => {
                             console.log('begin willAuthError');
-                            return false;
+                            const expirationTime = new Date(user.tokenExpiresIn * 1000);
+                            const currentTime = new Date();
+                            if (currentTime < expirationTime){
+                                console.log('token still valid');
+                                return false;
+                            }
+                            console.log('token was expired ')
+                            return true;
                         },
                         didAuthError: () => {
                             console.log('begin didAuthError');
+
                         },
                         refreshAuth: () => {
                             console.log('begin refreshAuth');
+
                         }
                     }
                     // },
