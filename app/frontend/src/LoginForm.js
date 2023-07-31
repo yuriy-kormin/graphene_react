@@ -12,7 +12,7 @@ import ErrorAlert from "./components/Alert/ErrorAlert";
 
 const LoginForm = () => {
     const dispatch = useDispatch()
-    const [loginError, setLoginError] = useState(false);
+    const [loginError, setLoginError] = useState({error: false, message:''});
 
     const [result,processLogin] = useMutation(LoginQUERY);
 
@@ -26,20 +26,21 @@ const LoginForm = () => {
             passwordInputRef.current.value,
             processLogin,
             dispatch
-        ).then(isLogin => {
-            if (!isLogin) {setLoginError(true)}
+        ).then(loginResult => {
+            if (!loginResult.result) {
+                setLoginError({error: true, message: loginResult.info.message})
+            }
         })
-
     }
 
     return (
         <Form className={"mt-5"} data-testid='loginForm'>
             {
-                loginError && !result.fetching && (
+                loginError.error && !result.fetching && (
                 <ErrorAlert
                     show={loginError}
                     onClose={() => setLoginError(false)}
-                >Введенные данные не верны</ErrorAlert>
+                >{loginError.message}</ErrorAlert>
                 )
             }
             <TextInput
@@ -47,7 +48,7 @@ const LoginForm = () => {
                    label="Login"
                    data-testid='login'
                    icon={faUser}
-                   className = {loginError && !result.fetching?'is-invalid':''}
+                   className = {loginError.error && !result.fetching?'is-invalid':''}
                    _ref = {loginInputRef}
                    autoComplete='username'
             />
@@ -56,7 +57,7 @@ const LoginForm = () => {
                 label="Password"
                 data-testid='password'
                 icon={faLock}
-                className = {loginError && !result.fetching?'is-invalid':''}
+                className = {loginError.error && !result.fetching?'is-invalid':''}
                 _ref = {passwordInputRef}
                 autoComplete='password'
                 is_password={true}
