@@ -1,7 +1,7 @@
 FROM node:alpine as build
 WORKDIR /app/
 COPY ./app/frontend/package*.json ./
-COPY ./app/frontend/public ./
+COPY ./app/frontend/public/index.html ./public/
 RUN npm install --omit=dev && \
     npm run build
 
