@@ -71,17 +71,12 @@ function App({urqlClient=undefined}) {
                             const refreshResult = await utils.mutate(
                                 RefreshTokenMUTATION,variables
                             )
-                            console.log('user is ', user,{
-                                ...user,
-                                token: refreshResult.data.refreshToken.token,
-                                tokenExpiresIn:refreshResult.data.refreshToken.payload.exp
-                            })
 
                             dispatch(userSetAction({
                                 ...user,
-                                token: refreshResult.data.refreshToken.token,
-                                tokenExpiresIn:refreshResult.data.refreshToken.payload.exp
+                                ...refreshResult.data.refreshToken
                             }))
+                            setRefreshState(false);
                         }
                     }
                     // },
