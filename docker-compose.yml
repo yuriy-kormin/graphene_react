@@ -4,8 +4,16 @@ services:
     frontend:
         build:
             context: .
-            dockerfile: Docker/frontend/Dockerfile
+            dockerfile: ./Docker/frontend/Dockerfile
         volumes:
             - ./app/frontend/:/app/
         expose:
             - 3000:3000
+    backend:
+        build:
+            context: .
+            dockerfile: ./Docker/backend/Dockerfile
+        volumes:
+            - ./app/backend/:/app/
+        expose:
+            - 8000

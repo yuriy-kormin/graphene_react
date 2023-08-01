@@ -1,21 +1,24 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Container from 'react-bootstrap/Container';
 import LoginForm from "./LoginForm";
 import UserList from "./userList";
 import NavBar from "./NavBar";
 import {getUser} from "./store/selectors/getUser";
 import {useDispatch, useSelector} from "react-redux";
-import {Client, Provider, cacheExchange, fetchExchange, dedupExchange, makeOperation} from 'urql';
+import {Client, Provider, cacheExchange, fetchExchange, dedupExchange, makeOperation, useMutation} from 'urql';
 import {devtoolsExchange} from "@urql/devtools";
 import {authExchange} from "@urql/exchange-auth";
 import {userSetAction} from "./store/UserReducer";
 import {getTokensFromStorage} from "./store/tokenStore";
+import {LoginQUERY, RefreshTokenMUTATION} from "./backend_helpers/queries";
 
 
 
 function App({urqlClient=undefined}) {
     const dispatch = useDispatch()
     const user = useSelector(getUser);
+    const [refreshState,setRefreshState] = useState(false)
+
     const value = urqlClient || new Client({
             url: 'http://localhost:8000/graphql/',
             exchanges: [
@@ -37,20 +40,14 @@ function App({urqlClient=undefined}) {
                     }
                     return {
                         addAuthToOperation: operation => {
-                            console.log('begin addAuthToOperation');
-                            if (user.is_login){
+                            console.log('begin addAuthToOperation', refreshState);
+                            if (user.is_login && !refreshState){
                                 console.log('set token to headers')
                                 return utils.appendHeaders(operation,{
                                     Authorization: `Bearer ${user.token}`,
                                 })
                             }
                             return operation
-                            // makeOperation(operation.kind, operation, {
-                            //     ...operation.context,
-                            //     someAuthThing: user.token,
-                            // });
-                            // return operation
-
                         },
                         willAuthError: () => {
                             console.log('begin willAuthError');
@@ -67,9 +64,24 @@ function App({urqlClient=undefined}) {
                             console.log('begin didAuthError');
 
                         },
-                        refreshAuth: () => {
+                        refreshAuth: async () => {
                             console.log('begin refreshAuth');
+                            setRefreshState(true);
+                            const variables = {refreshToken: user.refreshToken}
+                            const refreshResult = await utils.mutate(
+                                RefreshTokenMUTATION,variables
+                            )
+                            console.log('user is ', user,{
+                                ...user,
+                                token: refreshResult.data.refreshToken.token,
+                                tokenExpiresIn:refreshResult.data.refreshToken.payload.exp
+                            })
 
+                            dispatch(userSetAction({
+                                ...user,
+                                token: refreshResult.data.refreshToken.token,
+                                tokenExpiresIn:refreshResult.data.refreshToken.payload.exp
+                            }))
                         }
                     }
                     // },

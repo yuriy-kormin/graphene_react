@@ -16,12 +16,10 @@ from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv()
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -33,12 +31,10 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 ALLOWED_HOSTS = ['*']
 
-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 
@@ -67,7 +63,6 @@ if DEBUG:
     INSTALLED_APPS.extend([
         'django_extensions',
     ])
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -100,23 +95,20 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'graphene_auth.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if os.getenv('DATABASE_URL') == 'NOT_SET':
+if os.getenv('DATABASE_URL', 'NOT_SET') == 'NOT_SET':
     DATABASES = {'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-        }
+        'NAME': os.path.join(BASE_DIR, 'db', 'db.sqlite3'),
+    }
     }
 else:
     DATABASES = {'default': dj_database_url.config(
-        default='spatialite:///db.sqlite3',
         conn_max_age=600,
         conn_health_checks=True,
     )}
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -136,7 +128,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
@@ -147,7 +138,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
@@ -171,7 +161,7 @@ GRAPHENE = {
 GRAPHQL_JWT = {
     "JWT_VERIFY_EXPIRATION": True,
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
-    "JWT_EXPIRATION_DELTA": timedelta(minutes=5),
+    "JWT_EXPIRATION_DELTA": timedelta(seconds=10),
     "JWT_REFRESH_EXPIRATION_DELTA": timedelta(days=7),
     "JWT_AUTH_HEADER_PREFIX": "Bearer",
 }
@@ -183,4 +173,3 @@ AUTHENTICATION_BACKENDS = [
 
 CORS_ORIGIN_ALLOW_ALL = True
 #### remove it !!!!
-
