@@ -1,0 +1,11 @@
+version: "3.9"
+
+services:
+    frontend:
+        build:
+            context: .
+            dockerfile: Docker/frontend/Dockerfile
+        volumes:
+            - ./app/frontend/:/app/
+        expose:
+            - 3000:3000
