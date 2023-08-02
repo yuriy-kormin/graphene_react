@@ -1,7 +1,7 @@
 FROM node:alpine as build
+ARG REACT_APP_BACKEND_URL="http://localhost:8000/graphql/"
 WORKDIR /app/
 COPY app/frontend/ .
-
 RUN npm install --omit=dev && \
     npm run build
 

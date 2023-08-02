@@ -4,21 +4,12 @@ const setUser = "SET_USER"
 const logout = "LOGOUT"
 
 export const parseAuthResult = (authData) => {
-    const listKeys = [
-        'token',
-        'refreshToken',
-        'refreshExpiresIn',
-        'payload'
-    ]
-    const allKeysExist = listKeys.every((key) => authData.hasOwnProperty(key));
-    if (allKeysExist) {
-        return {
-            token: authData.token,
-            refreshToken: authData.refreshToken,
-            refreshExpiresIn: authData.refreshExpiresIn,
-            username: authData.payload.username,
-            tokenExpiresIn:authData.payload.exp
-        }
+    return {
+        token: authData?.token,
+        refreshToken: authData?.refreshToken,
+        refreshExpiresIn: authData?.refreshExpiresIn,
+        username: authData?.payload?.username,
+        tokenExpiresIn:authData?.payload?.exp
     }
 }
 
@@ -26,7 +17,7 @@ export const userReducer = (state={is_login:false}, action) => {
     switch (action.type){
         case setUser:
             const json = parseAuthResult(action.payload)
-
+            console.log(json)
             if (json){
                 setTokensToStorage(action.payload);
                 return {...state, is_login:true, ...json}

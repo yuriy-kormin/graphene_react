@@ -4,16 +4,21 @@ services:
     frontend:
         build:
             context: .
-            dockerfile: ./Docker/frontend/Dockerfile
+            dockerfile: Docker/frontend/Dockerfile
         volumes:
             - ./app/frontend/:/app/
-        expose:
+        ports:
             - 80:80
+        depends_on:
+            - backend
     backend:
         build:
             context: .
-            dockerfile: ./Docker/backend/Dockerfile
+            dockerfile: Docker/backend/Dockerfile
+        env_file:
+            - .env
         volumes:
             - ./app/backend/:/app/
-        expose:
-            - 8000
+        ports:
+            - 8000:8000
+
