@@ -9,6 +9,7 @@ import {act} from "react-dom/test-utils";
 
 
 describe('App root testing',()=>{
+    process.env.REACT_APP_BACKEND_URL = 'http://localhost'
     test('default state is display login form',()=>{
         render (<Provider store={store}><App /></Provider>);
         expect(screen.getByTestId('loginForm')).toBeInTheDocument();
