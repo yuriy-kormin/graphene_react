@@ -8,8 +8,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up environment variables
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
         run: |
-          echo "${{ secrets.ENV_FILE }}" > .env
+          echo $ENV_FILE > .env
 
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1
