@@ -22,7 +22,8 @@
     "type-fest": "^0.21.3",
     "typescript": "^4.9.5",
     "urql": "^4.0.4",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^2.1.4",
+    "@urql/devtools": "^2.0.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -50,7 +51,6 @@
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.17.0",
-    "@urql/devtools": "^2.0.3",
     "wonka": "^6.3.3",
     "redux-devtools-extension": "^2.13.9"
   }

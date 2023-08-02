@@ -3,8 +3,7 @@ ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
 COPY ["app/backend/pyproject.toml","app/backend/poetry.lock","README.md","/poetry/"]
-COPY Docker/backend/docker-entrypoint.sh /
-COPY app/backend/manage.py /app/
+COPY Docker/backend/docker-entrypoint.sh /docker-entrypoint.d/99-launching.sh
 WORKDIR /poetry
 
 RUN apt update && \
