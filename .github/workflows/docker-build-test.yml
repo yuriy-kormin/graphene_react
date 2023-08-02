@@ -4,6 +4,18 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up environment variables
+        run: |
+          while IFS= read -r line; do
+            for var in $(echo "$line" | grep -o -P "{{\K[^}]+(?=}})"); do
+              value=$(printenv "$var")
+              line="${line//"{{$var}}"/$value}"
+            done
+            echo "$line" >> .env
+          done < .env.template
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1
 
