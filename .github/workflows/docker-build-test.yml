@@ -1,0 +1,20 @@
+name: Docker Compose Build and Test
+on: push
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: isbang/compose-action@v1.4.1
+
+      - name: Waiting for docker containers starting up
+        run: sleep 30
+
+      - name: Test Connection
+        run: |
+          http_status=$(curl -o /dev/null -s -w "%{http_code}" http://localhost)
+          if [ "$http_status" != "200" ]; then
+            echo "Connection error: HTTP status $http_status"
+            exit 1
+          fi
+          echo "Connection successful"
