@@ -4,15 +4,16 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v3
       - name: Set up environment variables
         run: |
           ls -la
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1
-
       - name: Waiting for docker containers starting up
-        run: sleep 30
-
+        run: |
+          sleep 30
+          ls -la
       - name: Test Connection
         run: |
           http_status=$(curl -o /dev/null -s -w "%{http_code}" http://localhost)
