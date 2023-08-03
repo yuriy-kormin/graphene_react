@@ -11,8 +11,8 @@ jobs:
         env:
           ENV_FILE: ${{ secrets.ENV_FILE }}
         run: |
-          echo $ENV_FILE > .env
-
+          echo "${{ secrets.ENV_FILE }}"> .env
+          ls -la
       - uses: actions/checkout@v3
       - uses: isbang/compose-action@v1.4.1
 
