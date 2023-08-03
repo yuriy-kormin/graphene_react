@@ -11,7 +11,6 @@ import {useURQLClient} from "./hooks/useURQLClient";
 function App({urqlClient=undefined}) {
     const user = useSelector(getUser);
     const client = useURQLClient()
-    console.log('urqlClient ',urqlClient);
     return (
         <Provider value={urqlClient || client}>
             <div className="App">
