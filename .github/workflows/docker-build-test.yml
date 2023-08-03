@@ -1,26 +1,23 @@
-name: Docker Compose Build and Test
+name: Docker build
 on: push
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v3
       - name: Set up environment variables
         env:
           ENV_FILE: ${{ secrets.ENV_FILE }}
         run: |
-          echo $ENV_FILE > .env
-
-      - uses: actions/checkout@v3
+          echo "$ENV_FILE" > .env
+          docker-compose config
       - uses: isbang/compose-action@v1.4.1
-
       - name: Waiting for docker containers starting up
         run: sleep 30
 
       - name: Test Connection
         run: |
+          ls -la
           http_status=$(curl -o /dev/null -s -w "%{http_code}" http://localhost)
           if [ "$http_status" != "200" ]; then
             echo "Connection error: HTTP status $http_status"

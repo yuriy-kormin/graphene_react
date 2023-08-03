@@ -2,7 +2,7 @@
 
 [![React testing](https://github.com/yuriy-kormin/graphene_react/actions/workflows/front_tests.yml/badge.svg)](https://github.com/yuriy-kormin/graphene_react/actions/workflows/front_tests.yml)
 [![React Codecov](https://codecov.io/gh/yuriy-kormin/graphene_react/branch/master/graph/badge.svg?token=O5TX5CE9XH)](https://codecov.io/gh/yuriy-kormin/graphene_react)
-
+[![Docker Build](https://github.com/yuriy-kormin/graphene_react/actions/workflows/docker-build-test.yml/badge.svg)](https://github.com/yuriy-kormin/graphene_react/actions/workflows/docker-build-test.yml)
 
 This repository aims to establish a connection between a 
 Django backend using the Graphene library for GraphQL and 
