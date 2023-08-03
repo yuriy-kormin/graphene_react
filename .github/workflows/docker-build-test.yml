@@ -5,8 +5,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set up environment variables
-        env:
-          ENV_FILE: ${{ secrets.ENV_FILE }}
         run: |
           echo "${{ secrets.ENV_FILE }}"> .env
           ls -la
