@@ -15,7 +15,6 @@ from datetime import timedelta
 from pathlib import Path
 from dotenv import load_dotenv
 import dj_database_url
-from django.core.management.utils import get_random_secret_key
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -157,11 +156,14 @@ GRAPHENE = {
     ],
 }
 
+TOKEN_EXPIRATION = os.getenv('TOKEN_EXPIRATION', 5*60)  #5 minutes
+REFRESH_EXPIRATION = os.getenv('REFRESH_EXPIRATION', 7*60*60*24) # 7 days default
+
 GRAPHQL_JWT = {
     "JWT_VERIFY_EXPIRATION": True,
     "JWT_LONG_RUNNING_REFRESH_TOKEN": True,
-    "JWT_EXPIRATION_DELTA": timedelta(seconds=10),
-    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(seconds=20),
+    "JWT_EXPIRATION_DELTA": timedelta(seconds=int(TOKEN_EXPIRATION)),
+    "JWT_REFRESH_EXPIRATION_DELTA": timedelta(seconds=int(REFRESH_EXPIRATION)),
     "JWT_AUTH_HEADER_PREFIX": "Bearer",
 }
 
