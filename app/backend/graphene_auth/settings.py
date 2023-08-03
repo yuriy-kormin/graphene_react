@@ -30,7 +30,6 @@ DEBUG = os.getenv('DEBUG') == 'True'
 
 SECRET_KEY = os.getenv('DJANGO_SECRET')
 
-ALLOWED_HOSTS = ['*']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
@@ -171,6 +170,17 @@ AUTHENTICATION_BACKENDS = [
     "graphql_jwt.backends.JSONWebTokenBackend",
     "django.contrib.auth.backends.ModelBackend",
 ]
+
+ALLOWED_HOSTS = ['*']
 if DEBUG:
     CORS_ORIGIN_ALLOW_ALL = True
+else:
+    ALLOWED_HOSTS_ENV = os.getenv('ALLOWED_HOSTS', '*')
+    if ALLOWED_HOSTS_ENV:
+        ALLOWED_HOSTS = [
+            host.strip() for host
+            in ALLOWED_HOSTS_ENV.split(',')
+        ]
+
+    CORS_ALLOWED_ORIGINS = ALLOWED_HOSTS
 #### remove it !!!!
