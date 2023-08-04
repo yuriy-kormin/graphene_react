@@ -25,6 +25,8 @@ export const RefreshTokenMUTATION =gql`
     refreshToken(refreshToken:$refreshToken){
         token
         payload
+        refreshToken
+        refreshExpiresIn
       }
     }
 `

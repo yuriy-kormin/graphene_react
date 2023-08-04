@@ -5,8 +5,9 @@ import {useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {getUser} from "../store/selectors/getUser";
 import {getTokensFromStorage} from "../store/tokenStore";
-import {userSetAction} from "../store/UserReducer";
+import {logoutAction, userSetAction} from "../store/UserReducer";
 import {RefreshTokenMUTATION} from "../backend_helpers/queries";
+import {IsTimemarkValid} from "../backend_helpers/lib";
 
 
 
@@ -36,7 +37,7 @@ export const useURQLClient = () =>{
                 }
                 return {
                     addAuthToOperation: operation => {
-                        console.log('begin addAuthToOperation', refreshState);
+                        console.log('begin addAuthToOperation');
                         if (user.is_login && !refreshState){
                             console.log('set token to headers')
                             return utils.appendHeaders(operation,{
@@ -47,18 +48,22 @@ export const useURQLClient = () =>{
                     },
                     willAuthError: () => {
                         console.log('begin willAuthError');
-                        const expirationTime = new Date(user.tokenExpiresIn * 1000);
-                        const currentTime = new Date();
-                        if (currentTime < expirationTime){
+                        if (IsTimemarkValid(user.tokenExpiresIn)){
                             console.log('token still valid');
                             return false;
                         }
-                        console.log('token was expired ')
-                        return true;
+
+                        if (IsTimemarkValid(user.refreshExpiresIn))  {
+                            console.log('token was expired  but refresh is active');
+                            return true;
+                        }
+                        console.log('both token is expired');
+                        dispatch(logoutAction())
                     },
-                    didAuthError: () => {
+                    didAuthError: (error, operation) => {
                         console.log('begin didAuthError');
 
+                        return error.graphQLErrors.some(e => e.extensions?.code === 'FORBIDDEN');
                     },
                     refreshAuth: async () => {
                         console.log('begin refreshAuth');
@@ -73,6 +78,7 @@ export const useURQLClient = () =>{
                             ...refreshResult.data.refreshToken
                         }))
                         setRefreshState(false);
+
                     }
                 }
             }),

@@ -17,7 +17,6 @@ export const userReducer = (state={is_login:false}, action) => {
     switch (action.type){
         case setUser:
             const json = parseAuthResult(action.payload)
-            console.log(json)
             if (json){
                 setTokensToStorage(action.payload);
                 return {...state, is_login:true, ...json}
