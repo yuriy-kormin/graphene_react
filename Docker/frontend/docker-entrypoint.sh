@@ -2,7 +2,7 @@
 
 if [ -n "$ALLOWED_HOSTS" ]; then
   DOMAIN=$(echo "$ALLOWED_HOSTS" | cut -d',' -f1)
-  REACT_APP_BACKEND_URL="http://${DOMAIN}/graphql/"
+  REACT_APP_BACKEND_URL="http://${DOMAIN}/graphql"
   echo "Setting REACT_APP_BACKEND_URL to $REACT_APP_BACKEND_URL"
   export REACT_APP_BACKEND_URL
 else
