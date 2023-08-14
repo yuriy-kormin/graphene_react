@@ -13,7 +13,7 @@ jobs:
           docker-compose config
       - uses: isbang/compose-action@v1.4.1
       - name: Waiting for docker containers starting up
-        run: sleep 30
+        run: sleep 60
 
       - name: Test Connection
         run: |
