@@ -1,5 +1,11 @@
 #!/bin/sh
 
+
+if [ -f /etc/nginx/conf.d/default.conf ]; then
+    rm /etc/nginx/conf.d/default.conf
+fi
+
+
 # Making log dir with files
 nginx_log_dir="/var/log/nginx"
 access_log_file="access.log"
