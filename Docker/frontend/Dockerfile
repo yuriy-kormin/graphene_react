@@ -1,11 +1,9 @@
-FROM node:alpine as build
-ARG REACT_APP_BACKEND_URL="http://localhost:8000/graphql/"
-WORKDIR /app/
-COPY app/frontend/ .
-RUN npm install --omit=dev && \
-    npm run build
+FROM node:alpine
 
-FROM nginx:alpine
-RUN rm -rf /usr/share/nginx/html/*
-COPY --from=build /app/build /usr/share/nginx/html
-CMD ["nginx", "-g", "daemon off;"]
+COPY ["app/frontend/package.json","app/frontend/package-lock.json","Docker/frontend/docker-entrypoint.sh","/"]
+WORKDIR /
+RUN npm install -g npm@latest && \
+    npm install && \
+    npm ci --install-strategy=shallow --omit=dev --silent &&  \
+    npm cache clean --force
+CMD ["/docker-entrypoint.sh"]
