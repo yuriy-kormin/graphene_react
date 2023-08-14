@@ -27,3 +27,5 @@ if [ ! -d "$nginx_log_dir" ]; then
 else
   echo "Directory $nginx_log_dir already exists"
 fi
+#run daemon
+nginx -g daemon off;
