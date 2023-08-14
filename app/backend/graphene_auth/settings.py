@@ -94,8 +94,9 @@ WSGI_APPLICATION = 'graphene_auth.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
+DATABASE_URL_ENV = os.getenv('DATABASE_URL')
 
-if os.getenv('DATABASE_URL', 'NOT_SET') == 'NOT_SET':
+if not DATABASE_URL_ENV:
     DATABASES = {'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db', 'db.sqlite3'),
