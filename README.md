@@ -5,6 +5,7 @@
 [![React](https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
 [![Bootstrap](https://img.shields.io/badge/-Bootstrap-7952B3?style=for-the-badge&logo=bootstrap&logoColor=white)](https://getbootstrap.com/)
 [![REDUX](https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white)](https://redux.js.org)
+[![JWT](https://img.shields.io/badge/JWT-JSON%20Web%20Tokens-1E90FF?style=for-the-badge)](https://jwt.io/)
 [![urql](https://img.shields.io/badge/-urql-blue?style=for-the-badge&logo=urql&logoColor=white)](https://formidable.com/open-source/urql/)
 
 
@@ -17,9 +18,10 @@
 
 # Overview
 
-The project combines the backend capabilities of Django and Graphene for 
-processing requests with a React frontend to provide a user-friendly 
-interface. I also use urql library for process user authentification.
+It's a seamless integration of Django, Graphene, and React, harmonizing backend prowess with frontend elegance. This collaboration empowers the project to handle requests efficiently, leveraging the robustness of Django and the versatility of Graphene for processing data. Complementing this, the React frontend offers a polished and user-friendly interface that enhances the overall user experience.
+
+🔐 Additionally, the project employs the urql library for user authentication. With urql, user login is streamlined, enhancing security and convenience. JSON Web Tokens (JWT) are harnessed to ensure secure authorization. Once logged in, a JWT token is generated and securely stored, eliminating the need for frequent reauthorization. This thoughtful approach ensures a smooth user journey, allowing users to access the application seamlessly, even after several days.
+
 
 ## ATTENTION
 
