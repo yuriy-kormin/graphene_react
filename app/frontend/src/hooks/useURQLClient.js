@@ -33,7 +33,6 @@ export const useURQLClient = () =>{
                         return tokens;
                     }
                     console.log('token not found');
-                    return null;
                 }
                 return {
                     addAuthToOperation: operation => {

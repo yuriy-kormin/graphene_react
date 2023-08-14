@@ -4,7 +4,7 @@ import NewButton from "./components/button/NewButton";
 import {Form} from "react-bootstrap";
 import {useDispatch} from "react-redux";
 import {useMutation} from "urql";
-import {LoginQUERY} from "./backend_helpers/queries";
+import {LoginQUERY, UserListQUERY} from "./backend_helpers/queries";
 import {processUserLogin} from "./backend_helpers/requests";
 import {faUser, faLock} from '@fortawesome/free-solid-svg-icons';
 import Loading from "./components/spinner/Loading";
