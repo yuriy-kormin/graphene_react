@@ -1,4 +1,5 @@
 [![Docker](https://img.shields.io/badge/-Docker-2496ED?style=for-the-badge&logo=docker&logoColor=white)](https://docs.docker.com/com)
+[![NGINX](https://img.shields.io/badge/Nginx-269539?style=for-the-badge&logo=nginx&logoColor=white)](https://www.nginx.com)
 [![Django](https://img.shields.io/badge/-Django-092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
 [![Graphene](https://img.shields.io/badge/-Graphene-E10098?style=for-the-badge&logo=graphql&logoColor=white)](https://graphene-python.org/)
 [![React](https://img.shields.io/badge/-React-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
@@ -72,3 +73,52 @@ cookies for token management.
 Consider this [article](https://www.rdegges.com/2018/please-stop-using-local-storage/).
 
 # INSTALLATION
+
+Follow these steps to set up and run the project using Docker:
+
+- **Clone and navigate to repository**: 
+
+   ```bash
+   git clone https://github.com/yuriy-kormin/graphene_react.git
+   cd graphene_react
+   ```
+- **Set .env file**
+    ```bash
+    mv .env.template .env
+    ```
+  
+  set this variables in .env
+  
+  - DJANGO_SECRET [use this option](https://djecrety.ir)
+  - DJANGO_SUPERUSER_USERNAME
+  - DJANGO_SUPERUSER_PASSWORD
+  - DJANGO_SUPERUSER_EMAIL
+
+  if you running project NOT in local machine, additionally set
+  - ALLOWED_HOSTS (possible to use ip address also)
+  
+  Additionally, you can set DATABASE_URL for custom database setup. 
+- More info you can found [here](https://github.com/jazzband/dj-database-url#url-schema)
+
+### Installation process remarks
+
+The Docker building process encompasses two core stages: constructing the 
+React production build and deploying it via Nginx. This process employs
+distinct Docker images tailored for each task. Opting to utilize the React 
+development start process isn't the optimal route, hence I opt for crafting 
+a production-ready React version, generating static JavaScript files.
+Upon completing this step, the React image's function concludes,
+seamlessly transitioning the task of serving the application to the widely
+used Nginx web server. This approach is particularly efficient for serving 
+static files.
+
+# RUNNING  
+
+  - **run and enjoy**
+    ```bash
+      docker compose up --build
+    ```
+    project opens at http://localhost by default or by http://ALLOWED_HOSTS from .env
+Use  DJANGO_SUPERUSER_USERNAME and DJANGO_SUPERUSER_PASSWORD to access
+
+
