@@ -19,6 +19,6 @@ lint:
 	poetry run flake8 graphene_auth --exclude migrations,migrations-old,migrations_old
 coverage:
 	poetry run python -m coverage run manage.py test
-translate:
-	${MANAGE} makemessages --locale ru --ignore=venv
-	${MANAGE} compilemessages --locale ru
+gen_secret:
+	poetry run python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+

@@ -22,6 +22,4 @@ class Query(graphene.ObjectType):
 
     @login_required
     def resolve_user_listing(self, info):
-        # print(jwt_settings.__dict__)
         return get_user_model().objects.all()
-        # raise GraphQLError('Authentication failure!!')
