@@ -32,7 +32,5 @@ services:
         volumes:
             - react-build:/usr/share/nginx/html/
             - ./log:/var/log/:rw
-        depends_on:
-            - frontend
 volumes:
     react-build:
