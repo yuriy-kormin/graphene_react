@@ -9,6 +9,8 @@ services:
             - ./app/frontend/:/app/
         ports:
             - 80:80
+        env_file:
+            - .env
         depends_on:
             - backend
     backend:
