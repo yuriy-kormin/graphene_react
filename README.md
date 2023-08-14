@@ -66,14 +66,6 @@ library. Custom authentication processes have been implemented to ensure secure
 data retrieval and processing. GraphQL queries and mutations are used to 
 communicate between the frontend and backend.
 
-## ATTENTION
-
-In the initial implementation, this project employs local storage for token 
-storage. However, this approach is not secure. To enhance security, 
-I am in the process of transitioning to the use of cryptographically signed 
-cookies for token management.
-Consider this [article](https://www.rdegges.com/2018/please-stop-using-local-storage/).
-
 # INSTALLATION
 
 Follow these steps to set up and run the project using Docker:
