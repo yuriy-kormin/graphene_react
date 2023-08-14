@@ -7,8 +7,8 @@ services:
             dockerfile: Docker/frontend/Dockerfile
         volumes:
             - ./app/frontend/:/app/
-        ports:
-            - 80:80
+            - ./log:/var/log/:rw
+            - react-build:/app/build/
         env_file:
             - .env
         depends_on:
@@ -21,6 +21,17 @@ services:
             - .env
         volumes:
             - ./app/backend/:/app/
-        ports:
-            - 8000:8000
+            - ./log:/var/log/:rw
+        expose:
+            - 8000
 
+    nginx:
+        build:
+            context: .
+            dockerfile: ./Docker/nginx/Dockerfile
+        volumes:
+            - react-build:/usr/share/nginx/html/
+            - ./log:/var/log/:rw
+
+volumes:
+    react-build:
