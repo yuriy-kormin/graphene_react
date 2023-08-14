@@ -18,6 +18,7 @@
 The project combines the backend capabilities of Django and Graphene for 
 processing requests with a React frontend to provide a user-friendly 
 interface. I also use urql library for process user authentification 
+<img width="568" alt="Screenshot 2023-08-14 at 16 36 24" src="https://github.com/yuriy-kormin/graphene_react/assets/96548294/fdf11a61-5116-4176-b8d0-486133efe2e1">
 
 ### Backend
 
