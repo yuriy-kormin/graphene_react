@@ -1,9 +1,4 @@
-#!/bin/bash
-set -e
-
-if [ -f /etc/nginx/conf.d/default.conf ]; then
-    rm /etc/nginx/conf.d/default.conf
-fi
+#!/bin/sh
 
 #making log dir with files
 nginx_log_dir="/var/log/nginx"
